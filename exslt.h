@@ -1,0 +1,13 @@
+void* exsltCommonRegister ();
+void* exsltDateRegister ();
+void* exsltDateXpathCtxtRegister ();
+void* exsltDynRegister ();
+void* exsltFuncRegister ();
+void* exsltMathRegister ();
+void* exsltMathXpathCtxtRegister ();
+void* exsltRegisterAll ();
+void* exsltSaxonRegister ();
+void* exsltSetsRegister ();
+void* exsltSetsXpathCtxtRegister ();
+void* exsltStrRegister ();
+void* exsltStrXpathCtxtRegister ();

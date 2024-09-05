@@ -1,0 +1,13 @@
+void* exsltCommonRegister () { return 0; }
+void* exsltDateRegister () { return 0; }
+void* exsltDateXpathCtxtRegister () { return 0; }
+void* exsltDynRegister () { return 0; }
+void* exsltFuncRegister () { return 0; }
+void* exsltMathRegister () { return 0; }
+void* exsltMathXpathCtxtRegister () { return 0; }
+void* exsltRegisterAll () { return 0; }
+void* exsltSaxonRegister () { return 0; }
+void* exsltSetsRegister () { return 0; }
+void* exsltSetsXpathCtxtRegister () { return 0; }
+void* exsltStrRegister () { return 0; }
+void* exsltStrXpathCtxtRegister () { return 0; }
