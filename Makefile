@@ -1,15 +1,18 @@
 .POSIX:
 XCFLAGS = ${CPPFLAGS} ${CFLAGS} -nostdlib -std=c99 -fPIC -Wall -Wno-pedantic
 XLDFLAGS = ${LDFLAGS} -shared -Wl
-LIBDIR = /usr/lib64
+LIBDIR = /lib64
 
 all:
 	${CC} ${XCFLAGS} libexslt.c -c -o libexslt.o
 	${CC} ${XCFLAGS} libexslt.o -o libexslt.so.0 ${XLDFLAGS},-soname,libexslt.so.0
 	${CC} ${XCFLAGS} libxslt.c -c -o libxslt.o
 	${CC} ${XCFLAGS} libxslt.o -o libxslt.so.1 ${XLDFLAGS},-soname,libxslt.so.1
+	sed -e 's/__libdir__/usr\/\${LIBDIR}/g' libexslt.pc.in > libexslt.pc
+	sed -e 's/__libdir__/usr\/\${LIBDIR}/g' libxslt.pc.in > libxslt.pc
 
 install:
+	LIBDIR = "/usr${LIBDIR}"
 	mkdir -p ${DESTDIR}/usr/bin
 	touch ${DESTDIR}/usr/bin/xsltproc
 	chmod 755 ${DESTDIR}/usr/bin/xsltproc
@@ -54,6 +57,6 @@ uninstall:
 	rm -f ${DESTDIR}${LIBDIR}/libxslt.so
 
 clean:
-	rm -f libexslt.o libxslt.o libexslt.so.0 libxslt.so.1
+	rm -f libexslt.o libxslt.o libexslt.so.0 libxslt.so.1 libexslt.pc libxslt.pc
 
 .PHONY: all clean install uninstall
