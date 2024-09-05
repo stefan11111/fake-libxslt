@@ -32,7 +32,7 @@ install: all
 	mkdir -p ${DESTDIR}${LIBDIR}/cmake
 	cp -rf libxslt ${DESTDIR}${LIBDIR}/cmake/libxslt
 	mkdir -p ${DESTDIR}/usr/include/x86_64-pc-linux-gnu/libxslt
-	cp -f xsltconfig.h ${DESTDIR}/usr/include/x86_64-pc-linux-gnu/libxslt/xsltconfig.h
+	touch ${DESTDIR}/usr/include/x86_64-pc-linux-gnu/libxslt/xsltconfig.h
 	touch ${DESTDIR}${LIBDIR}/xsltConf.sh
 	chmod 755 ${DESTDIR}${LIBDIR}/xsltConf.sh
 	cp -f libexslt.so.0 ${DESTDIR}${LIBDIR}/libexslt.so.0
