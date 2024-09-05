@@ -1,18 +1,18 @@
 .POSIX:
 XCFLAGS = ${CPPFLAGS} ${CFLAGS} -nostdlib -std=c99 -fPIC -Wall -Wno-pedantic
 XLDFLAGS = ${LDFLAGS} -shared -Wl
-LIBDIR = /lib64
+PKGCONF_LIBDIR = /lib64
+LIBDIR = /usr/lib64
 
 all:
 	${CC} ${XCFLAGS} libexslt.c -c -o libexslt.o
 	${CC} ${XCFLAGS} libexslt.o -o libexslt.so.0 ${XLDFLAGS},-soname,libexslt.so.0
 	${CC} ${XCFLAGS} libxslt.c -c -o libxslt.o
 	${CC} ${XCFLAGS} libxslt.o -o libxslt.so.1 ${XLDFLAGS},-soname,libxslt.so.1
-	sed -e 's/__libdir__/usr\/\${LIBDIR}/g' libexslt.pc.in > libexslt.pc
-	sed -e 's/__libdir__/usr\/\${LIBDIR}/g' libxslt.pc.in > libxslt.pc
+	sed -e 's/__libdir__/usr\/\${PKGCONF_LIBDIR}/g' libexslt.pc.in > libexslt.pc
+	sed -e 's/__libdir__/usr\/\${PKGCONF_LIBDIR}/g' libxslt.pc.in > libxslt.pc
 
-install:
-	LIBDIR = "/usr${LIBDIR}"
+install: all
 	mkdir -p ${DESTDIR}/usr/bin
 	touch ${DESTDIR}/usr/bin/xsltproc
 	chmod 755 ${DESTDIR}/usr/bin/xsltproc
