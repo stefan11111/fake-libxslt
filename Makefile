@@ -37,8 +37,8 @@ install: all
 	chmod 755 ${DESTDIR}${LIBDIR}/xsltConf.sh
 	cp -f libexslt.so.0 ${DESTDIR}${LIBDIR}/libexslt.so.0
 	ln -rsf ${DESTDIR}${LIBDIR}/libexslt.so.0 ${DESTDIR}${LIBDIR}/libexslt.so
-	cp -f libxslt.so.0 ${DESTDIR}${LIBDIR}/libxslt.so.0
-	ln -rsf ${DESTDIR}${LIBDIR}/libxslt.so.0 ${DESTDIR}${LIBDIR}/libxslt.so
+	cp -f libxslt.so.1 ${DESTDIR}${LIBDIR}/libxslt.so.1
+	ln -rsf ${DESTDIR}${LIBDIR}/libxslt.so.1 ${DESTDIR}${LIBDIR}/libxslt.so
 
 uninstall:
 	rm -f ${DESTDIR}/usr/bin/xsltproc
@@ -53,7 +53,7 @@ uninstall:
 	rm -f ${DESTDIR}${LIBDIR}/xsltConf.sh
 	rm -f ${DESTDIR}${LIBDIR}/libexslt.so.0
 	rm -f ${DESTDIR}${LIBDIR}/libexslt.so
-	rm -f ${DESTDIR}${LIBDIR}/libxslt.so.0
+	rm -f ${DESTDIR}${LIBDIR}/libxslt.so.1
 	rm -f ${DESTDIR}${LIBDIR}/libxslt.so
 
 clean:
