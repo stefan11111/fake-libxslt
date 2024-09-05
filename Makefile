@@ -1,20 +1,21 @@
 .POSIX:
-XCFLAGS = ${CPPFLAGS} ${CFLAGS} -nostdlib -std=c99 -fPIC -Wall -Wno-pedantic
+XCFLAGS = ${CPPFLAGS} ${CFLAGS} -std=c99 -fPIC -Wall -Wno-pedantic
 XLDFLAGS = ${LDFLAGS} -shared -Wl
 PKGCONF_LIBDIR = /lib64
 LIBDIR = /usr/lib64
 
 all:
-	${CC} ${XCFLAGS} libexslt.c -c -o libexslt.o
-	${CC} ${XCFLAGS} libexslt.o -o libexslt.so.0 ${XLDFLAGS},-soname,libexslt.so.0
-	${CC} ${XCFLAGS} libxslt.c -c -o libxslt.o
-	${CC} ${XCFLAGS} libxslt.o -o libxslt.so.1 ${XLDFLAGS},-soname,libxslt.so.1
+	${CC} ${XCFLAGS} -nostdlib libexslt.c -c -o libexslt.o
+	${CC} ${XCFLAGS} -nostdlib libexslt.o -o libexslt.so.0 ${XLDFLAGS},-soname,libexslt.so.0
+	${CC} ${XCFLAGS} -nostdlib libxslt.c -c -o libxslt.o
+	${CC} ${XCFLAGS} -nostdlib libxslt.o -o libxslt.so.1 ${XLDFLAGS},-soname,libxslt.so.1
+	${CC} ${XCFLAGS} xsltproc.c -o xsltproc
 	sed -e 's/__libdir__/usr\/\${PKGCONF_LIBDIR}/g' libexslt.pc.in > libexslt.pc
 	sed -e 's/__libdir__/usr\/\${PKGCONF_LIBDIR}/g' libxslt.pc.in > libxslt.pc
 
 install: all
 	mkdir -p ${DESTDIR}/usr/bin
-	touch ${DESTDIR}/usr/bin/xsltproc
+	cp -f xsltproc ${DESTDIR}/usr/bin/xsltproc
 	chmod 755 ${DESTDIR}/usr/bin/xsltproc
 	touch ${DESTDIR}/usr/bin/xslt-config
 	chmod 755 ${DESTDIR}/usr/bin/xslt-config
@@ -57,6 +58,6 @@ uninstall:
 	rm -f ${DESTDIR}${LIBDIR}/libxslt.so
 
 clean:
-	rm -f libexslt.o libxslt.o libexslt.so.0 libxslt.so.1 libexslt.pc libxslt.pc
+	rm -f libexslt.o libxslt.o libexslt.so.0 libxslt.so.1 libexslt.pc libxslt.pc xsltproc
 
 .PHONY: all clean install uninstall
