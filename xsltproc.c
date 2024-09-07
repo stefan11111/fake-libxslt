@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 
     for (char **p = argv; *p; p++) {
         if (!strncmp(*p, "-o", sizeof("-o") - 1) || !strncmp(*p, "--output", sizeof("--output") - 1)) {
-            (void)!fopen(*p, "w");
+            fopen(*p, "w");
             return 0;
         }
     }
